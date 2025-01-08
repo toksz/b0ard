@@ -20,6 +20,7 @@ function Gallery() {
         if (error) {
           console.error('Error fetching data:', error);
         } else {
+          console.log('Fetched data:', data); // Debugging line
           setMediaItems(data);
         }
       } catch (error) {
