@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
     import supabase from '../utils/supabaseClient';
     import './MediaView.css';
     import MediaPlayer from './MediaPlayer';
+    import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+    import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
     function MediaView() {
       const { id } = useParams();
@@ -51,15 +53,17 @@ import React, { useState, useEffect } from 'react';
 
       const handlePrev = () => {
         if (currentIndex > 0) {
-          setCurrentIndex(currentIndex - 1);
-          navigate(`/media/${mediaItems[currentIndex - 1].id}`);
+          const prevIndex = currentIndex - 1;
+          setCurrentIndex(prevIndex);
+          navigate(`/${mediaItems[prevIndex].id}`);
         }
       };
 
       const handleNext = () => {
         if (currentIndex < mediaItems.length - 1) {
-          setCurrentIndex(currentIndex + 1);
-          navigate(`/media/${mediaItems[currentIndex + 1].id}`);
+          const nextIndex = currentIndex + 1;
+          setCurrentIndex(nextIndex);
+          navigate(`/${mediaItems[nextIndex].id}`);
         }
       };
 
@@ -72,29 +76,44 @@ import React, { useState, useEffect } from 'react';
       }
 
       const storageUrl = supabase.storage.from('media').getPublicUrl(mediaItem.storage_path).data.publicUrl;
-      const isImage = mediaItem.type === 'image' || mediaItem.type === 'jpeg' || mediaItem.type === 'png';
+      const isImage = mediaItem.type === 'image' || mediaItem.type === 'jpeg' || mediaItem.type === 'png' || mediaItem.type === 'jpg';
 
       return (
         <div className="media-view-container">
           <div className="media-display">
+            <span
+              className={`nav-arrow prev ${currentIndex === 0 ? 'disabled' : ''}`}
+              onClick={handlePrev}
+              style={{ display: currentIndex === 0 ? 'none' : 'block' }}
+            >
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </span>
             {isImage ? (
               <img src={storageUrl} alt={mediaItem.url} className="media-image" />
             ) : (
               <MediaPlayer url={storageUrl} />
             )}
+            <span
+              className={`nav-arrow next ${currentIndex === mediaItems.length - 1 ? 'disabled' : ''}`}
+              onClick={handleNext}
+              style={{ display: currentIndex === mediaItems.length - 1 ? 'none' : 'block' }}
+            >
+              <FontAwesomeIcon icon={faChevronRight} />
+            </span>
           </div>
           <div className="media-info">
-            <p><strong>User:</strong> {mediaItem.user}</p>
-            <p><strong>Type:</strong> {mediaItem.type}</p>
-            <p><strong>Score:</strong> {mediaItem.score}</p>
-          </div>
-          <div className="navigation-buttons">
-            <button onClick={handlePrev} disabled={currentIndex === 0}>
-              Previous
-            </button>
-            <button onClick={handleNext} disabled={currentIndex === mediaItems.length - 1}>
-              Next
-            </button>
+            <div>
+              <strong>User:</strong>
+              {mediaItem.user}
+            </div>
+            <div>
+              <strong>Type:</strong>
+              {mediaItem.type}
+            </div>
+            <div>
+              <strong>Score:</strong>
+              {mediaItem.score}
+            </div>
           </div>
         </div>
       );

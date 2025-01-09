@@ -11,7 +11,7 @@ import React from 'react';
             <h1>Media Gallery</h1>
             <Routes>
               <Route path="/" element={<Gallery />} />
-              <Route path="/media/:id" element={<MediaView />} />
+              <Route path="/:id" element={<MediaView />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

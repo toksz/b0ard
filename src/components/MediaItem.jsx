@@ -7,7 +7,7 @@ import React from 'react';
       const storageUrl = supabase.storage.from('media').getPublicUrl(item.thumb_path).data.publicUrl;
       return (
         <div className="media-item">
-          <Link to={`/media/${item.id}`}>
+          <Link to={`/${item.id}`}>
             {item.thumb_path && <img src={storageUrl} alt={item.url} />}
           </Link>
         </div>

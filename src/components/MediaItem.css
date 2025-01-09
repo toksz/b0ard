@@ -1,10 +1,19 @@
 .media-item {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+      background-color: #2a2a2a;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      transition: transform 0.2s ease-in-out;
+    }
 
-.media-item img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  margin-bottom: 10px;
-}
+    .media-item:hover {
+      transform: scale(1.05);
+    }
+
+    .media-item img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
