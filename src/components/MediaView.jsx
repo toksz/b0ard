@@ -33,6 +33,7 @@ import React, { useState, useEffect } from 'react';
                 setCurrentIndex(index);
                 setMediaItem(data[index]);
               } else {
+                 setMediaItem(null);
                 console.error('Media item not found');
                 navigate('/not-found');
               }

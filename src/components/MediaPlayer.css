@@ -5,57 +5,11 @@
       align-items: center;
     }
 
-    .react-player {
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .react-player__play-button {
-      background-color: rgba(255, 255, 255, 0.1) !important;
-      border-radius: 50% !important;
-      transition: background-color 0.3s ease !important;
-    }
-
-    .react-player__play-button:hover {
-      background-color: rgba(255, 255, 255, 0.2) !important;
-    }
-
-    .react-player__controls {
-      background-color: rgba(0, 0, 0, 0.7) !important;
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
-    }
-
-    .react-player__progress {
-      background-color: #007bff !important;
-    }
-
-    .react-player__progress__played {
-      background-color: #007bff !important;
-    }
-
-    .react-player__progress__handle {
-      background-color: #fff !important;
-    }
-
-    .react-player__time {
-      color: #fff !important;
-    }
-
-    .react-player__volume-bar {
-      background-color: #555 !important;
-    }
-
-    .react-player__volume-bar__played {
-      background-color: #fff !important;
-    }
-
-    .react-player__volume-bar__handle {
-      background-color: #fff !important;
-    }
-
-    .react-player__fullscreen-button {
-      color: #fff !important;
+    .video-player {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      background-color: #1a1a1a;
     }
 
     .audio-player {
@@ -70,31 +24,28 @@
       align-items: center;
     }
 
-    .audio-player audio {
+    .audio-controls {
+      display: flex;
+      align-items: center;
       width: 100%;
-      margin-bottom: 10px;
+      margin-top: 10px;
     }
 
-    .audio-player audio::-webkit-media-controls-panel {
-      background-color: #333;
+    .audio-controls button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
       border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
     }
 
-    .audio-player audio::-webkit-media-controls-play-button {
-      background-color: #555;
-      border-radius: 50%;
+    .audio-controls input[type="range"] {
+      flex: 1;
+      margin-right: 10px;
     }
 
-    .audio-player audio::-webkit-media-controls-current-time-display,
-    .audio-player audio::-webkit-media-controls-time-remaining-display {
+    .audio-controls span {
       color: #fff;
-    }
-
-    .audio-player audio::-webkit-media-controls-timeline {
-      background-color: #555;
-      border-radius: 4px;
-    }
-
-    .audio-player audio::-webkit-media-controls-timeline-thumb {
-      background-color: #fff;
     }
