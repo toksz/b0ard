@@ -101,10 +101,8 @@ import React, { useState, useEffect } from 'react';
             )}
             {isImage ? (
               <img src={storageUrl} alt={mediaItem.url} className="media-image" onLoad={() => setMediaLoaded(true)} />
-            ) : isAudio ? (
-              <MediaPlayer url={storageUrl} />
             ) : (
-              <MediaPlayer url={storageUrl} />
+              <MediaPlayer url={storageUrl} type={mediaItem.type} />
             )}
             {mediaLoaded && (
               <span
