@@ -13,10 +13,12 @@ import React, { useState, useEffect } from 'react';
       const [loading, setLoading] = useState(true);
       const [mediaItems, setMediaItems] = useState([]);
       const [currentIndex, setCurrentIndex] = useState(0);
+      const [mediaLoaded, setMediaLoaded] = useState(false);
 
       useEffect(() => {
         const fetchMedia = async () => {
           setLoading(true);
+          setMediaLoaded(false);
           try {
             const { data, error } = await supabase
               .from('media_items')
@@ -44,6 +46,12 @@ import React, { useState, useEffect } from 'react';
 
         fetchMedia();
       }, [id, navigate]);
+
+      useEffect(() => {
+        if (mediaItem) {
+          setMediaLoaded(true);
+        }
+      }, [mediaItem]);
 
       useEffect(() => {
         if (mediaItems.length > 0 && currentIndex >= 0 && currentIndex < mediaItems.length) {
@@ -76,30 +84,37 @@ import React, { useState, useEffect } from 'react';
       }
 
       const storageUrl = supabase.storage.from('media').getPublicUrl(mediaItem.storage_path).data.publicUrl;
-      const isImage = mediaItem.type === 'image' || mediaItem.type === 'jpeg' || mediaItem.type === 'png' || mediaItem.type === 'jpg';
+      const isImage = mediaItem.type === 'image' || mediaItem.type === 'jpeg' || mediaItem.type === 'png' || mediaItem.type === 'jpg' || mediaItem.type === 'webp' || mediaItem.type === 'gif';
+      const isAudio = mediaItem.type === 'mp3' || mediaItem.type === 'wav' || mediaItem.type === 'ogg';
 
       return (
         <div className="media-view-container">
           <div className="media-display">
-            <span
-              className={`nav-arrow prev ${currentIndex === 0 ? 'disabled' : ''}`}
-              onClick={handlePrev}
-              style={{ display: currentIndex === 0 ? 'none' : 'block' }}
-            >
-              <FontAwesomeIcon icon={faChevronLeft} />
-            </span>
+            {mediaLoaded && (
+              <span
+                className={`nav-arrow prev ${currentIndex === 0 ? 'disabled' : ''}`}
+                onClick={handlePrev}
+                style={{ display: currentIndex === 0 ? 'none' : 'block' }}
+              >
+                <FontAwesomeIcon icon={faChevronLeft} />
+              </span>
+            )}
             {isImage ? (
-              <img src={storageUrl} alt={mediaItem.url} className="media-image" />
+              <img src={storageUrl} alt={mediaItem.url} className="media-image" onLoad={() => setMediaLoaded(true)} />
+            ) : isAudio ? (
+              <MediaPlayer url={storageUrl} />
             ) : (
               <MediaPlayer url={storageUrl} />
             )}
-            <span
-              className={`nav-arrow next ${currentIndex === mediaItems.length - 1 ? 'disabled' : ''}`}
-              onClick={handleNext}
-              style={{ display: currentIndex === mediaItems.length - 1 ? 'none' : 'block' }}
-            >
-              <FontAwesomeIcon icon={faChevronRight} />
-            </span>
+            {mediaLoaded && (
+              <span
+                className={`nav-arrow next ${currentIndex === mediaItems.length - 1 ? 'disabled' : ''}`}
+                onClick={handleNext}
+                style={{ display: currentIndex === mediaItems.length - 1 ? 'none' : 'block' }}
+              >
+                <FontAwesomeIcon icon={faChevronRight} />
+              </span>
+            )}
           </div>
           <div className="media-info">
             <div>

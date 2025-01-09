@@ -5,9 +5,55 @@
       align-items: center;
     }
 
-    .video-player {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;
-      background-color: #1a1a1a;
+    .react-player {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .react-player__play-button {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+      border-radius: 50% !important;
+      transition: background-color 0.3s ease !important;
+    }
+
+    .react-player__play-button:hover {
+      background-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    .react-player__controls {
+      background-color: rgba(0, 0, 0, 0.7) !important;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+
+    .react-player__progress {
+      background-color: #007bff !important;
+    }
+
+    .react-player__progress__played {
+      background-color: #007bff !important;
+    }
+
+    .react-player__progress__handle {
+      background-color: #fff !important;
+    }
+
+    .react-player__time {
+      color: #fff !important;
+    }
+
+    .react-player__volume-bar {
+      background-color: #555 !important;
+    }
+
+    .react-player__volume-bar__played {
+      background-color: #fff !important;
+    }
+
+    .react-player__volume-bar__handle {
+      background-color: #fff !important;
+    }
+
+    .react-player__fullscreen-button {
+      color: #fff !important;
     }

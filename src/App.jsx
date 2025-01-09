@@ -1,5 +1,5 @@
 import React from 'react';
-    import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+    import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
     import Gallery from './components/Gallery';
     import MediaView from './components/MediaView';
     import NotFound from './components/NotFound';
@@ -8,7 +8,11 @@ import React from 'react';
       return (
         <Router>
           <div className="App">
-            <h1>Media Gallery</h1>
+            <h1 style={{cursor: 'pointer'}}>
+              <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                b0ard
+              </Link>
+            </h1>
             <Routes>
               <Route path="/" element={<Gallery />} />
               <Route path="/:id" element={<MediaView />} />
